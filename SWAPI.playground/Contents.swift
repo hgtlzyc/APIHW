@@ -84,11 +84,11 @@ class SwapiService {
 SwapiService.fetchPerson(id: 5) { person in
     guard let person = person else { return }
     print(person.name)
+    print("height ", person.height)
     person.films.forEach { url in
         SwapiService.fetchFilm(url: url) { film in
             guard let film = film else { return }
             print(film.title, "----", film.release_date)
-            
         }
     }
 }
