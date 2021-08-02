@@ -18,9 +18,9 @@ struct Film: Codable {
 
 class SwapiService {
     
-    static private let baseURL = URL(string: "https://swapi.dev/api/people")
-    
     static func fetchPerson(id: Int, completion: @escaping (Person?) -> Void) {
+        let baseURL = URL(string: "https://swapi.dev/api/people")
+        
         guard let baseURL = baseURL else {
             completion(nil)
             return
@@ -29,7 +29,8 @@ class SwapiService {
         let finalURL = baseURL.appendingPathComponent("\(id)")
         
         URLSession.shared.dataTask(with: finalURL) { data, _, err in
-            if let _ = err {
+            if let err = err {
+                print(err)
                 completion(nil)
                 return
             }
